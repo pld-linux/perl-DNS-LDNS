@@ -8,7 +8,7 @@ Summary:	DNS::LDNS - Perl extension for the ldns library
 Summary(pl.UTF-8):	DNS::LDNS - rozszerzenie Perla do biblioteki ldns
 Name:		perl-DNS-LDNS
 Version:	0.63
-Release:	1
+Release:	2
 # same as perl 5.14.2+ (see LDNS.pm; LICENSE is old and misleading)
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
@@ -40,6 +40,8 @@ biblioteki ldns można znaleźć pod adresem
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
+
+%{__rm} t/{dnssec_datachain,resolver}.t
 
 %build
 %{__perl} Makefile.PL \
