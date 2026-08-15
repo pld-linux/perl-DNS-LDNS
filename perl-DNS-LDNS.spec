@@ -14,6 +14,7 @@ License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/DNS/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	c544481a56995b1abcb70405e9e26877
+Patch0:		double-free.patch
 URL:		https://metacpan.org/release/DNS-LDNS
 BuildRequires:	ldns-devel
 BuildRequires:	perl-ExtUtils-MakeMaker
@@ -40,6 +41,7 @@ biblioteki ldns można znaleźć pod adresem
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
+%patch -P0 -p1
 
 %{__rm} t/{dnssec_datachain,resolver}.t
 

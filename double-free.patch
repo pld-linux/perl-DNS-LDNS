@@ -1,0 +1,17 @@
+--- DNS-LDNS-0.63/LDNS.xs.orig	2021-11-18 10:45:58.000000000 +0100
++++ DNS-LDNS-0.63/LDNS.xs	2026-08-16 01:19:54.402851503 +0200
+@@ -1319,9 +1319,11 @@
+ 	DNS__LDNS__RData rdf;
+         SV* binstr;
+ 	CODE:
+-        const char* downgrd = SvPVbyte_nolen(binstr);
+-        ldns_rdf_set_data(rdf, downgrd);
+-        ldns_rdf_set_size(rdf, SvCUR(binstr));
++        int size = SvCUR(binstr);
++        char* data = LDNS_XMALLOC(char, size);
++        memcpy(data, SvPVbyte_nolen(binstr), size);
++        ldns_rdf_set_data(rdf, data);
++        ldns_rdf_set_size(rdf, size);
+ 
+ void
+ print(rdf, fp)
